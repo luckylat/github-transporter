@@ -9,7 +9,7 @@
 - save git data only `.github-transporter`.
 
 ## Why I Created?
-I using obsidian on OneDrive with plugins.
+I using obsidian on OneDrive with plugins.  
 some plugin has `.git` file, so the time to sync is so long.
 
 ## Functions
@@ -20,9 +20,10 @@ some plugin has `.git` file, so the time to sync is so long.
 ```
 github-transport export
 ```
-- make `.github-transporter` file.
-- remove `.git` folder.
-** local modified data will be lost, must push to origin. **
+- make `.github-transporter` file.  
+- remove `.git` folder.  
+
+**local modified data will be lost, must push to origin.**
 
 ### import
 ```

@@ -1,7 +1,7 @@
 # github-transporter
 
 ## Notice
-- The product is not targeted to use GitHub/GitLab as storage.  
+- The repository is not targeted to use GitHub/GitLab as storage.  
 - It may drop working status, so it use carefully.
 - It presuppose to exist remote git repository stably. if you use unstable remote server, don't use this.
 

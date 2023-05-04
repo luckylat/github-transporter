@@ -20,7 +20,7 @@ func modifiedLocalRepository() (bool, error) {
     if err != nil {
         return false, err
     }
-    return gitStatus != nil, nil
+    return len(gitStatus) != 0, nil
 }
 
 func exportCommand() error {

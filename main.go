@@ -1,6 +1,7 @@
 package main
 
 import (
+    "errors"
     "flag"
     "fmt"
     "io/ioutil"
@@ -14,7 +15,28 @@ const filename = ".github-transporter"
 
 //TODO: Restore function
 
+func modifiedLocalRepository() (bool, error) {
+    gitStatus, err := exec.Command("git", "status", "--porcelain=v2").Output()
+    if err != nil {
+        return false, err
+    }
+    return gitStatus != nil, nil
+}
+
 func exportCommand() error {
+    modified, err := modifiedLocalRepository()
+    if err != nil {
+        fmt.Println("cannot get git status")
+        return err
+    } else if modified {
+        fmt.Print("Local Change detected! continue to delete .git folder? [y/N]:")
+        var input string
+        fmt.Scan(&input)
+        if input != "y" {
+            return errors.New("Aborted.")
+        }
+    }
+
     //get origin URL
     repositoryName, err := exec.Command("git", "remote", "get-url", "origin").Output()
     if err != nil {
@@ -33,7 +55,7 @@ func exportCommand() error {
     dotfile.WriteString("remote = " + string(repositoryName))
 
     if err := os.RemoveAll(".git"); err != nil {
-        fmt.Println("cannot remove .git file")
+        fmt.Println("cannot remove .git folder")
         return err
     }
     return nil
